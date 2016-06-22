@@ -1,0 +1,26 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "A simple todo app written with React, ExpressJS and MongoDB.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keligijus/todo-app.git"
+  },
+  "author": "Eligijus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keligijus/todo-app/issues"
+  },
+  "homepage": "https://github.com/keligijus/todo-app#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "body-parser": "^1.15.2",
+    "mongoose": "^4.5.1",
+    "node-restful": "^0.2.5"
+  }
+}
