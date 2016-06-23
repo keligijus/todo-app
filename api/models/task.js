@@ -7,8 +7,7 @@ var mongoose = restful.mongoose;
 var taskSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
     body: String,
-    completed: Boolean,
-    archived: Boolean
+    completed: Boolean
 });
 
 // Return model

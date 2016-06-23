@@ -10,7 +10,10 @@ export default class TodoList extends React.Component {
   constructor() {
     super();
 
-    this.state = {tasks: []}
+    this.state = {
+      tasks: [],
+      hideCompleted: false
+    }
   }
 
   componentDidMount() {
@@ -121,7 +124,6 @@ export default class TodoList extends React.Component {
                               id={task._id}
                               body={task.body}
                               completed={task.completed}
-                              archived={task.archived}
                               updateTaskBody={that.updateTaskBody.bind(that)}
                               updateCompletedStatus={that.updateCompletedStatus.bind(that)}
                               deleteTask={that.deleteTask.bind(that)} />
