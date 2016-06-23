@@ -62,10 +62,13 @@ export default class TodoList extends React.Component {
   }
 
   addNewTask(e) {
-    let taskBody = e.target.value;
     let that = this;
+    let target = e.target.children[0]
+    let taskBody = target.value;
 
-    if (!e.target.value) { return; }
+    e.preventDefault();
+
+    if (!taskBody) { return; }
 
     $.ajax({
       method: 'POST',
@@ -75,6 +78,7 @@ export default class TodoList extends React.Component {
     }).done(response => {
       let tasks = that.state.tasks;
 
+      target.value = '';
       tasks.push(response);
 
       return that.setState({tasks: tasks});
@@ -106,9 +110,10 @@ export default class TodoList extends React.Component {
     return (
       <ul class="todo-list">
         <li>
-          <input type="text"
-                  placeholder="add new task"
-                  onBlur={this.addNewTask.bind(this)} />
+          <form onSubmit={this.addNewTask.bind(this)}>
+            <input type="text"
+                  placeholder="add new task"/>
+          </form>
         </li>
         {
           this.state.tasks.map(function(task) {
