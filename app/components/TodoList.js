@@ -40,15 +40,6 @@ export default class TodoList extends React.Component {
     });
 
     this.serverRequest.done((result) => this.setState({ tasks: result }))
-
-
-    //   , function (result) {
-    //   console.log(result)
-    //   this.setState({
-    //     tasks: result
-    //   });
-    // }.bind(this));
-
   }
 
   componentWillUnmount() {
@@ -62,6 +53,13 @@ export default class TodoList extends React.Component {
 
     state.tasks[indexOfUpdated].body = newTaskBody;
 
+    $.ajax({
+      method: 'Put',
+      url:'http://localhost:3000/api/v1/tasks/' + key,
+      dataType: 'json',
+      data: {body: newTaskBody}
+    }).done((msg) => console.log(msg));
+
     return this.setState({tasks: state.tasks});
   }
 
@@ -71,6 +69,13 @@ export default class TodoList extends React.Component {
     let indexOfUpdated = _.indexOf(state.tasks, updatedTask);
 
     state.tasks[indexOfUpdated].completed = status;
+
+    $.ajax({
+      method: 'Put',
+      url:'http://localhost:3000/api/v1/tasks/' + key,
+      dataType: 'json',
+      data: {completed: status}
+    }).done((msg) => console.log(msg));
 
     return this.setState({tasks: state.tasks});
   }
