@@ -5,7 +5,7 @@ var mongoose = restful.mongoose;
 
 // Schema
 var taskSchema = new mongoose.Schema({
-    // createdAt: { type: Date, default: Date.now },
+    createdAt: { type: Date, default: Date.now },
     body: String,
     completed: Boolean,
     archived: Boolean
