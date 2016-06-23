@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import classNames from 'classnames/bind';
+
 export default class TodoItem extends React.Component {
   handleTaskBodyChange(e) {
     let taskBody = e.target.value;
@@ -23,8 +25,13 @@ export default class TodoItem extends React.Component {
   }
 
   render() {
+    let className = classNames({
+      base: true,
+      completed: this.props.completed
+    });
+
     return (
-      <li class="item" id={this.props.id}>
+      <li class="item" id={this.props.id} class={className}>
         <input type="text"
                 name="task"
                 value={this.props.body}

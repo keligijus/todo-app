@@ -1,0 +1,4 @@
+.completed,
+.completed input {
+  text-decoration: line-through;
+}
