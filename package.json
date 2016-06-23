@@ -7,8 +7,8 @@
     "webpack": "webpack -w",
     "api": "nodemon ./api/server.js",
     "mongo": "mongod",
-    "dev-old": "concurrent --kill-others \"npm run webpack\" \"npm run api\" \"npm run mongo\"",
     "dev": "./node_modules/.bin/webpack-dev-server --content-base app --inline --hot",
+    "dev-be": "concurrent --kill-others \"npm run dev\" \"npm run api\" \"npm run mongo\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -31,6 +31,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
     "body-parser": "^1.15.2",
+    "jquery": "^3.0.0",
     "lodash": "^4.13.1",
     "mongoose": "^4.5.1",
     "node-restful": "^0.2.5",
