@@ -63,8 +63,9 @@ export default class TodoList extends React.Component {
 
   addNewTask(e) {
     let taskBody = e.target.value;
-    // let state = this.state;
     let that = this;
+
+    if (!e.target.value) { return; }
 
     $.ajax({
       method: 'POST',
@@ -78,6 +79,24 @@ export default class TodoList extends React.Component {
 
       return that.setState({tasks: tasks});
     });
+  }
+
+  deleteTask(key) {
+    let that = this;
+
+    $.ajax({
+      method: 'DELETE',
+      url:'http://localhost:3000/api/v1/tasks/' + key,
+      dataType: 'json'
+    }).done(response => {
+      let tasks = that.state.tasks;
+      let deletedTask = _.find(tasks, {'_id': key});
+      let indexOfDeleted = _.indexOf(tasks, deletedTask);
+
+      tasks.splice(indexOfDeleted, 1);
+
+      return that.setState({tasks: tasks});
+    })
   }
 
 
@@ -99,7 +118,8 @@ export default class TodoList extends React.Component {
                               completed={task.completed}
                               archived={task.archived}
                               updateTaskBody={that.updateTaskBody.bind(that)}
-                              updateCompletedStatus={that.updateCompletedStatus.bind(that)} />
+                              updateCompletedStatus={that.updateCompletedStatus.bind(that)}
+                              deleteTask={that.deleteTask.bind(that)} />
           })
         }
       </ul>

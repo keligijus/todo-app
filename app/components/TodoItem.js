@@ -16,6 +16,12 @@ export default class TodoItem extends React.Component {
     this.props.updateCompletedStatus(key, status);
   }
 
+  handleDelete(e) {
+    let key = e.target.attributes['data-id'].value;
+
+    this.props.deleteTask(key, status);
+  }
+
   render() {
     return (
       <li class="item" id={this.props.id}>
@@ -29,6 +35,9 @@ export default class TodoItem extends React.Component {
                 name="completed"
                 data-id={this.props.id}
                 onChange={this.handleCompletedStatus.bind(this)} />
+        <button name="delete"
+                data-id={this.props.id}
+                onClick={this.handleDelete.bind(this)}>Delete</button>
       </li>
     );
   }
