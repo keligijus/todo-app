@@ -11,25 +11,6 @@ export default class TodoList extends React.Component {
     super();
 
     this.state = {tasks: []}
-
-    // this.state = {
-    //   tasks: [
-    //     {
-    //       _id: '1',
-    //       createdAt: 1466581504989,
-    //       body: 'Remember to feed Cactus',
-    //       completed: false,
-    //       archived: false
-    //     },
-    //     {
-    //       _id: '2',
-    //       createdAt: 1466581326545,
-    //       body: 'Your new cat\'s name is Cactus',
-    //       completed: true,
-    //       archived: false
-    //     }
-    //   ]
-    // }
   }
 
   componentDidMount() {
@@ -58,7 +39,7 @@ export default class TodoList extends React.Component {
       url:'http://localhost:3000/api/v1/tasks/' + key,
       dataType: 'json',
       data: {body: newTaskBody}
-    }).done((msg) => console.log(msg));
+    }).done(msg => console.log(msg));
 
     return this.setState({tasks: state.tasks});
   }
@@ -71,20 +52,45 @@ export default class TodoList extends React.Component {
     state.tasks[indexOfUpdated].completed = status;
 
     $.ajax({
-      method: 'Put',
+      method: 'PUT',
       url:'http://localhost:3000/api/v1/tasks/' + key,
       dataType: 'json',
       data: {completed: status}
-    }).done((msg) => console.log(msg));
+    }).done(msg => console.log(msg));
 
     return this.setState({tasks: state.tasks});
   }
+
+  addNewTask(e) {
+    let taskBody = e.target.value;
+    // let state = this.state;
+    let that = this;
+
+    $.ajax({
+      method: 'POST',
+      url:'http://localhost:3000/api/v1/tasks',
+      dataType: 'json',
+      data: {body: taskBody}
+    }).done(response => {
+      let tasks = that.state.tasks;
+
+      tasks.push(response);
+
+      return that.setState({tasks: tasks});
+    });
+  }
+
 
   render() {
     let that = this;
 
     return (
       <ul class="todo-list">
+        <li>
+          <input type="text"
+                  placeholder="add new task"
+                  onBlur={this.addNewTask.bind(this)} />
+        </li>
         {
           this.state.tasks.map(function(task) {
             return <TodoItem  key={task._id}
