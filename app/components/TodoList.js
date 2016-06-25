@@ -12,8 +12,11 @@ export default class TodoList extends React.Component {
   constructor() {
     super();
 
+    let hideCompleted = window.localStorage.hideCompleted === 'true' ? true : false;
+
     this.state = {
-      tasks: []
+      tasks: [],
+      hideCompleted: hideCompleted
     }
   }
 
@@ -24,11 +27,7 @@ export default class TodoList extends React.Component {
       crossDomain: true
     });
 
-    this.serverRequest.done((result) => {
-      let reversedArray = _.reverse(result);
-
-      this.setState({ tasks: reversedArray })
-    });
+    this.serverRequest.done((result) => this.setState({ tasks: result}));
   }
 
   componentWillUnmount() {
@@ -115,6 +114,8 @@ export default class TodoList extends React.Component {
 
   toggleCompleted(e) {
     let isChecked = e.target.checked;
+
+    window.localStorage.hideCompleted = isChecked;
 
     return this.setState({hideCompleted: isChecked});
   }
