@@ -26,25 +26,24 @@ export default class TodoItem extends React.Component {
 
   render() {
     let className = classNames({
-      base: true,
       completed: this.props.completed
     });
 
     return (
       <li class="item" id={this.props.id} class={className}>
-        <input type="text"
-                name="task"
-                value={this.props.body}
-                data-id={this.props.id}
-                onChange={this.handleTaskBodyChange.bind(this)} />
         <input type="checkbox"
                 checked={this.props.completed}
                 name="completed"
                 data-id={this.props.id}
                 onChange={this.handleCompletedStatus.bind(this)} />
+        <input type="text"
+                name="task"
+                value={this.props.body}
+                data-id={this.props.id}
+                onChange={this.handleTaskBodyChange.bind(this)} />
         <button name="delete"
                 data-id={this.props.id}
-                onClick={this.handleDelete.bind(this)}>Delete</button>
+                onClick={this.handleDelete.bind(this)}>X</button>
       </li>
     );
   }

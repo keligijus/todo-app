@@ -12,7 +12,7 @@ Product.methods(['get', 'put', 'post', 'delete']);
 
 Product.after('get', function(req, res, next) {
   res.locals.bundle = _.reverse(res.locals.bundle)
-  next(); // Don't forget to call next!
+  next();
 });
 
 Product.register(router, '/tasks');
