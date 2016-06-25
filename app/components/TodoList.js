@@ -24,7 +24,11 @@ export default class TodoList extends React.Component {
       crossDomain: true
     });
 
-    this.serverRequest.done((result) => this.setState({ tasks: result }))
+    this.serverRequest.done((result) => {
+      let reversedArray = _.reverse(result);
+
+      this.setState({ tasks: reversedArray })
+    });
   }
 
   componentWillUnmount() {
@@ -85,7 +89,7 @@ export default class TodoList extends React.Component {
       let tasks = that.state.tasks;
 
       target.value = '';
-      tasks.push(response);
+      tasks.unshift(response);
 
       return that.setState({tasks: tasks});
     });
@@ -142,11 +146,13 @@ export default class TodoList extends React.Component {
           })
         }
         <li>
-          <label for="hideCompleted">Hide Completed</label>
-          <input type="checkbox"
+          <label for="hideCompleted">Hide Completed
+            <input type="checkbox"
                   checked={this.state.hideCompleted}
                   name="hideCompleted"
+                  id="hideCompleted"
                   onChange={this.toggleCompleted.bind(this)} />
+          </label>
         </li>
       </ul>
     );
