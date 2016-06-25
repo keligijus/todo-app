@@ -11,6 +11,14 @@ body {
 .completed,
 .completed input {
   text-decoration: line-through;
+  color: #999;
+}
+
+::-webkit-input-placeholder,
+:-moz-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder {
+  color: #999;
 }
 
 .hide-completed .completed {
@@ -83,11 +91,15 @@ body {
   cursor: pointer;
 }
 
-.todo-list>li button:hover {
+.todo-list>li button:hover,
+.todo-list>li button:focus,
+.todo-list>li button:active
+ {
   opacity: .7;
+  outline: none;
 }
 
-.hide-completed {
+.toggle-hide-completed {
   text-align: right;
   margin-right: 12px;
 }

@@ -146,7 +146,7 @@ export default class TodoList extends React.Component {
                               deleteTask={that.deleteTask.bind(that)} />
           })
         }
-        <li class="hide-completed">
+        <li class="toggle-hide-completed">
           <label for="hideCompleted">Hide Completed
             <input type="checkbox"
                   checked={this.state.hideCompleted}
