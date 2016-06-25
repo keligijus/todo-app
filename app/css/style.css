@@ -2,3 +2,7 @@
 .completed input {
   text-decoration: line-through;
 }
+
+.hide-completed .completed {
+  display: none;
+}

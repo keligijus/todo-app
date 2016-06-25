@@ -6,13 +6,14 @@ import $ from "jquery";
 
 import TodoItem from "./TodoItem";
 
+import classNames from 'classnames/bind';
+
 export default class TodoList extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      tasks: [],
-      hideCompleted: false
+      tasks: []
     }
   }
 
@@ -42,9 +43,10 @@ export default class TodoList extends React.Component {
       url:'http://localhost:3000/api/v1/tasks/' + key,
       dataType: 'json',
       data: {body: newTaskBody}
-    }).done(msg => console.log(msg));
-
-    return this.setState({tasks: state.tasks});
+    }).done(msg => {
+      console.log(msg)
+      return this.setState({tasks: state.tasks});
+    });
   }
 
   updateCompletedStatus(key, status) {
@@ -59,9 +61,10 @@ export default class TodoList extends React.Component {
       url:'http://localhost:3000/api/v1/tasks/' + key,
       dataType: 'json',
       data: {completed: status}
-    }).done(msg => console.log(msg));
-
-    return this.setState({tasks: state.tasks});
+    }).done(msg => {
+      console.log(msg)
+      return this.setState({tasks: state.tasks});
+    });
   }
 
   addNewTask(e) {
@@ -106,12 +109,21 @@ export default class TodoList extends React.Component {
     })
   }
 
+  toggleCompleted(e) {
+    let isChecked = e.target.checked;
+
+    return this.setState({hideCompleted: isChecked});
+  }
+
 
   render() {
     let that = this;
+    let className = classNames({
+      "hide-completed": this.state.hideCompleted
+    });
 
     return (
-      <ul class="todo-list">
+      <ul class={"todo-list " + className}>
         <li>
           <form onSubmit={this.addNewTask.bind(this)}>
             <input type="text"
@@ -129,6 +141,13 @@ export default class TodoList extends React.Component {
                               deleteTask={that.deleteTask.bind(that)} />
           })
         }
+        <li>
+          <label for="hideCompleted">Hide Completed</label>
+          <input type="checkbox"
+                  checked={this.state.hideCompleted}
+                  name="hideCompleted"
+                  onChange={this.toggleCompleted.bind(this)} />
+        </li>
       </ul>
     );
   }
