@@ -2,8 +2,9 @@
   "name": "todo-app",
   "version": "1.0.0",
   "description": "A simple todo app written with React, ExpressJS and MongoDB.",
-  "main": "index.js",
+  "main": "./api/index.js",
   "scripts": {
+    "start": "node ./api/server/js",
     "api": "nodemon ./api/server.js",
     "mongo": "mongod",
     "webpack": "./node_modules/.bin/webpack-dev-server --content-base app --inline --hot",
