@@ -4,17 +4,20 @@ var express = require('express');
 var router = express.Router();
 var _ = require('lodash');
 
+// Serve static files
+router.use(express.static('./app'));
+
 // Models
-var Product = require('../models/task');
+var Task = require('../models/task');
 
 // Routes
-Product.methods(['get', 'put', 'post', 'delete']);
+Task.methods(['get', 'put', 'post', 'delete']);
 
-Product.after('get', function(req, res, next) {
+Task.after('get', function(req, res, next) {
   res.locals.bundle = _.reverse(res.locals.bundle)
   next();
 });
 
-Product.register(router, '/tasks');
+Task.register(router, '/tasks');
 // Return router
 module.exports = router;

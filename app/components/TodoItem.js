@@ -5,8 +5,20 @@ import classNames from 'classnames/bind';
 
 export default class TodoItem extends React.Component {
   handleTaskBodyChange(e) {
-    let taskBody = e.target.value;
-    let key = e.target.attributes['data-id'].value;
+    let target;
+    let taskBody;
+    let key;
+
+    if (e.target.children.length > 0) {
+      target = e.target.children[0];
+
+      e.preventDefault();
+    } else {
+      target = e.target;
+    }
+
+    taskBody = target.value;
+    key = target.attributes['data-id'].value;
 
     this.props.updateTaskBody(key, taskBody);
   }
@@ -36,11 +48,13 @@ export default class TodoItem extends React.Component {
                 name="completed"
                 data-id={this.props.id}
                 onChange={this.handleCompletedStatus.bind(this)} />
-        <input type="text"
-                name="task"
-                value={this.props.body}
-                data-id={this.props.id}
-                onChange={this.handleTaskBodyChange.bind(this)} />
+        <form onSubmit={this.handleTaskBodyChange.bind(this)} >
+          <input type="text"
+                  name="task"
+                  defaultValue={this.props.body}
+                  data-id={this.props.id}
+                  onBlur={this.handleTaskBodyChange.bind(this)} />
+        </form>
         <button name="delete"
                 data-id={this.props.id}
                 onClick={this.handleDelete.bind(this)}>X</button>
