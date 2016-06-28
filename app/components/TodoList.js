@@ -23,7 +23,7 @@ export default class TodoList extends React.Component {
   componentDidMount() {
     this.serverRequest = $.ajax({
       method: 'GET',
-      url: 'http://localhost:3000/api/v1/tasks',
+      url: 'http://todoapp-keligijus.rhcloud.com/api/v1/tasks',
       crossDomain: true
     });
 
@@ -43,11 +43,11 @@ export default class TodoList extends React.Component {
 
     $.ajax({
       method: 'Put',
-      url:'http://localhost:3000/api/v1/tasks/' + key,
+      url:'http://todoapp-keligijus.rhcloud.com/api/v1/tasks/' + key,
       dataType: 'json',
       data: {body: newTaskBody}
     }).done(msg => {
-      console.log(msg)
+      // console.log(msg)
       return this.setState({tasks: state.tasks});
     });
   }
@@ -61,18 +61,18 @@ export default class TodoList extends React.Component {
 
     $.ajax({
       method: 'PUT',
-      url:'http://localhost:3000/api/v1/tasks/' + key,
+      url:'http://todoapp-keligijus.rhcloud.com/api/v1/tasks/' + key,
       dataType: 'json',
       data: {completed: status}
     }).done(msg => {
-      console.log(msg)
+      // console.log(msg)
       return this.setState({tasks: state.tasks});
     });
   }
 
   addNewTask(e) {
     let that = this;
-    let target = e.target.children[0]
+    let target = e.target.children[0];
     let taskBody = target.value;
 
     e.preventDefault();
@@ -81,7 +81,7 @@ export default class TodoList extends React.Component {
 
     $.ajax({
       method: 'POST',
-      url:'http://localhost:3000/api/v1/tasks',
+      url:'http://todoapp-keligijus.rhcloud.com/api/v1/tasks',
       dataType: 'json',
       data: {body: taskBody}
     }).done(response => {
@@ -99,7 +99,7 @@ export default class TodoList extends React.Component {
 
     $.ajax({
       method: 'DELETE',
-      url:'http://localhost:3000/api/v1/tasks/' + key,
+      url:'http://todoapp-keligijus.rhcloud.com/api/v1/tasks/' + key,
       dataType: 'json'
     }).done(response => {
       let tasks = that.state.tasks;
@@ -130,7 +130,7 @@ export default class TodoList extends React.Component {
     return (
       <ul class={"todo-list " + className}>
         <li>
-          <form onSubmit={this.addNewTask.bind(this)}>
+          <form onSubmit={this.addNewTask.bind(this)} class="full-width">
             <input type="text"
                   placeholder="add new task"/>
           </form>

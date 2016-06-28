@@ -40,6 +40,16 @@ body {
   margin-bottom: 12px;
 }
 
+.todo-list li form {
+  display: inline-block;
+  width: 100%;
+  width: calc(100% - 70px);
+}
+.todo-list li form.full-width {
+  width: 100%;
+  width: calc(100% - 20px);
+}
+
 .todo-list>li input[type="checkbox"] {
   width: 12px;
   margin: 4px;
